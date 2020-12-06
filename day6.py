@@ -1,18 +1,14 @@
-f = open('day6.data', 'r')
-data = f.read()
-data = data.split('\n\n')
-data = [d.split('\n') for d in data]
-print(data[0])
+from collections import defaultdict
+data = open('day6.data', 'r').read()
+groups = [d.split('\n') for d in data.split('\n\n')]
+common_answers = 0
+for group in groups:
+    group_dict = defaultdict(lambda: 0)
+    for person in group:
+        for answer in person:
+            group_dict[answer] += 1
+    for _, v in group_dict.items():
+        if v == len(group):
+            common_answers += 1
 
-answer = 0
-
-for d in data:
-    num_people = len(d)
-
-
-    
-print(answer)
-# data = [d.replace('\n', '') for d in data]
-# data = [''.join(set(d)) for d in data]
-# answer = sum(list(map(lambda x: len(x), data)))
-# print(answer)
+print(common_answers)
